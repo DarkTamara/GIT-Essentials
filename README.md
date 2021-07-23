@@ -1,5 +1,8 @@
 ﻿# GIT-Essentials
 
-##notes here
-##staging notes here
-##notes how to use this repo
+## Notes here
+
+## Staging notes here
+ 
+## Notes how to use this repo
+
