@@ -1,5 +1,5 @@
 ﻿# GIT-Essentials
-    This repository was meant as a test one for my GIT Course. It's purpose is to experiment and save my notes on the matter. It dose not contain any data except text files I use to better understand how to manipulate a repository.
+  This repository was meant as a test one for my GIT Course. It's purpose is to experiment and save my notes on the matter. It dose not contain any data except text files I use to better understand how to manipulate a repository.
     
 ## Instal and configure GIT:
     - instal GIT for Windows 
