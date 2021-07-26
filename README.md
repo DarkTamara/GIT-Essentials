@@ -132,4 +132,127 @@
         # big title
         ## smaller title
         
-new line here 
+# Advanced comands:
+
+## Viewing file differences
+Shows the differences between last commit and now, added or removed: 
+    git diff README.md 
+_Good workflow to use status and then diff before a commit_
+
+## How to ignore files
+For files that you don't want to add to your repository.
+    Create a .gitignore and store all files you want to ignore 
+_Dosen't even appear in status._
+
+## Custon Git alias
+Custom created comands, like macros.
+_You can open files in VS code terminal by using code <filename>_ 
+Course way:
+    1. Open/create .gitconfig 
+    2. [alias]
+    lg = log --topo-order --all --graph --date=local --pretty=format:'%C(green)%h%C(reset) %&gt;&lt;(55,trunc)%s%C(red)%d%C(reset) %C(blue)[%an]%C(reset) %C(yellow)%ad%C(reset)%n'
+This worked for me tho:
+    1. git config --global alias.lg 'log --oneline --graph --decorate --all'
+_Created a easy way to see the whole commit tree and where i am._
+
+## Fixing Git commit messages
+Make sure it is not yet submitted to GitHub. This works for the last commit you made.
+    git commit --amend 
+    _Edit the typo here in the file that opens_
+
+## Forking a repository
+Means taking all the code and copying it to your profile. Copying a project to another account.
+Useful for copying and making changes to a project you have no acces to. Usually you should look at the readme.md and the licencing. 
+To fork there's a button on GitHub.
+
+## Git Issue 
+Not something bad bad. More like a forum, you can just post suggestions or point out misspleed things, or identify real issues with the code.
+It can be assigned, it can be labeled and more. They can be closed but they are still searchable. 
+
+## Pull Request
+When a modification is created, ex. a new branch, when the change is pushed in gethub it will show the option to create a pull request. This way you can set it up for review before it merges. It can be assigned and use labels. 
+The commit can be reviewed. After the merge it can be deleted if not needed anymore, but it only deletes it on GitHub.
+To delete localy:
+    git branch -d pr-test
+
+## Undo a commit 
+Ex: doing a commmit and going back in a previous commit, undoing it. Two ways:
+soft reset = this uncommits but dose not delete the file   
+    git reset --soft <hash name> or <origin/master>
+hard reset = this deletes until that commit
+    git reset --hard <hash name>
+
+## Force push 
+If you accidentally pushed a commit you didn't want pushed. Be evry carefull iwth this force push.
+The ideea is that you push from a past commit to origin. It will delete all files commited after that point. It can not be undone.
+    git reset --hard <hash name> 
+This deletes the origin/master point. The commit can still be seen in the tree and can be reverted. 
+When you try to push this, it will give a error because we are in a past state. You can use pull and then pull or a force pusha nd overwrite this all.
+    git push origin master --force 
+Files dissapear and the commit on github is gone. 
+
+## Rebasing 
+Makes easier to read the tree by rewriting it. Rebase a branch onto master:
+    git rebase <name of the branch>
+Rebase is like merge only it shows up as a continuation of amster branch, not a separate branch and a merge, keeps the tree more clean. Makes it harder to see where the merge was made. 
+Merge is more ok for big projects.
+
+## Resolving merge and rebase conflicts
+A conflict happens when there's two change in the same file, basically in the same place. They can be merge conflicts, and rebase conflict.
+
+### merge conflict: a file is commited on github and on local
+    git pull origin master 
+Automatic merge failed; fix conflicts and then commit the result.
+    git diff <file.name>
+This shows the differences between the two versions. 
+Open the file and solve the conflicts in the edditor, it will tell you to choose the version you want to keep. 
+    git add .
+    git commit
+    git push origin master 
+
+### rebase conflict:
+In case you work in the last state and make a change on a file, but you also have that file on a branch in another state.
+On master do:
+    git rebase <branch name>
+Will show:
+"git add/rm <conflicted_files>", then run "git rebase --continue".
+CONFLICT (add/add): Merge conflict in rebase-conflict.txt
+! In case you are not sure about this, use git rebase --abort 
+Edit the file and resolve the conflicts. Can be modified in any way, the local, the master origin files, or even a hybrid made by me. To cheeck if it worked after modification, do a git dif <filename> to see if there are only + and -.
+    git add.
+    git status
+  (all conflicts fixed: run "git rebase --continue")
+No commit needed.
+    git rebase --continue
+    git log --oneline
+
+## Stash Code 
+Save some code behind the scenes and acces later. Useful when you switch branches to work on something elese and don't wanna lose work. Not commmited and not lost.
+The file can be grabbed later and worked on later 
+_You can create a new barnch with git branch <branchName> but you won't be checkedout on that branch. git checkout <newBranchName> creates a new branch adn also checes you in it. _
+If you do a git checout master and the work on the other branch is not commited, the work comes to the master branch. Brings the work in the other branch.
+Use this instead:
+    git stash 
+To see the stashed code:
+    git stash list 
+_This list is global, not on a branch_
+_In the tree log this work in progress appears. 8e388b0 (refs/stash) WIP on stash-example: c0b90c2 Rebase conflict example_
+To apply the list :
+    git stash apply
+The apply won't delete the file from the stash, you must do this in order to drop the last file added to the stash:
+    git stash drop
+
+## Adding Taggs to commits
+A way of marking a milestone. You can easy fix them and then checkout to them.
+Go to where you wnat the tag to be and add the line:
+    git tag <tag text here>
+It will show up in log.
+Tag list, alphabetical: 
+    git tag 
+Pushing a tag:
+    git push origin <tag text here>
+Multiple tags push:
+    git push origin --tags 
+Removing a tag:
+    git tag -d typo-name 
+    git push origin --delete tag-name 
