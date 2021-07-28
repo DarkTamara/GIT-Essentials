@@ -259,8 +259,8 @@ No commit needed.
 
 ## Stash Code 
 Save some code behind the scenes and acces later. Useful when you switch branches to work on something elese and don't wanna lose work. Not commmited and not lost.
-The file can be grabbed later and worked on later 
-_You can create a new barnch with git branch <branchName> but you won't be checkedout on that branch. git checkout <newBranchName> creates a new branch adn also checes you in it. _
+The file can be grabbed later and worked on later <br>
+_You can create a new barnch with git branch <branchName> but you won't be checkedout on that branch. git checkout <newBranchName> creates a new branch adn also checes you in it._<br>
 If you do a git checout master and the work on the other branch is not commited, the work comes to the master branch. Brings the work in the other branch.
 Use this instead:
 
